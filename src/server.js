@@ -16,15 +16,15 @@ const returnProducts = (route) => {
     }
 }
 
-app.get('/productos', (request, response) => { 
+app.get('/product', (request, response) => { //muestra todos los productos
     response.send(returnProducts('./productos.json'))
 })
-app.get('/productoRandom', (request, response) => { 
+app.get('/productRandom', (request, response) => { //muestra aleatoriamente los productos
     let products = returnProducts('./productos.json')
     let productRandom = products[parseInt(products.length*Math.random())]
     response.send(productRandom)
 })
-app.get('/producto/:idProduct', (request, response) => {
+app.get('/product/:idProduct', (request, response) => {//muestra por el id los productos
     const id = request.params.idProduct
     let products = returnProducts('./productos.json')
     let product = products.find((product) => product.id == id);

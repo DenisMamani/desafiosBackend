@@ -41,8 +41,7 @@ app.get('/product/:idProduct', (request, response) => {//muestra por el id los p
     }
 })
 /* rutas
-http://localhost:8080/productos
-http://localhost:8080/productoRandom
-http://localhost:8080/producto/1
+http://localhost:8080/product
+http://localhost:8080/productRandom
+http://localhost:8080/product/1
  */
-

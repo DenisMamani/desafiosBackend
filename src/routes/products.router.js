@@ -22,12 +22,12 @@ router.get("/:id",async(req,res)=>{
     let result = await contenedor.getById(id)
     res.send(result)
 })
-router.put("/:id",async(req,res)=>{//problemas al actualizar
-    let id = req.params.id
-    const newProduct = req.body.newProduct
-    if(isNaN(id)) return res.status(400).send({status:"error", error:"Invalid type"})
-    const oldProduct = await contenedor.getById(id)
-    res.send({objetoAnterior:oldProduct,nuevoTituloObjeto:newProductTitle,nuevoPrecioObjeto:newProductPrice, nuevaPortadaObjeto: newProductThumbnail})
+router.put('/:id', async (request, response) => {/*De esta manera se actualiza{ "title": "(insertarTitulo)","(ej)": "15500","thumbnail": "(ej)"}*/
+    const id = request.params.id
+    const productBody = request.body
+
+    let result = await contenedor.update(productBody, id)
+    response.send(result)
 })
 router.delete("/:id",async(req,res)=>{
     let id = req.params.id;

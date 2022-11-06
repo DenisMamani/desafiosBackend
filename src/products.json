@@ -1,0 +1,20 @@
+[
+  {
+    "title": "nft",
+    "price": "500000",
+    "thumbnail": "http://localhost:8080/thumbnail/1667704009034-5eeea355389655.59822ff824b72.gif",
+    "id": 1
+  },
+  {
+    "title": "LicuadoraActualizada",
+    "price": "15500",
+    "thumbnail": "http://localhost:8080/thumbnail/1667704020968-descarga.jpg",
+    "id": 2
+  },
+  {
+    "title": "Smartband",
+    "price": "5000",
+    "thumbnail": "http://localhost:8080/thumbnail/1667704033216-descarga.jpeg",
+    "id": 3
+  }
+]

@@ -9,6 +9,7 @@ router.post("/",uploader.single("thumbnail"),async (req,res)=>{
     const thumbnail = req.protocol+"://"+req.hostname+":8080/thumbnail/"+req.file.filename
     let product = req.body;
     product.thumbnail = thumbnail;
+    product.price = parseInt(product.price);
     const result = await contenedor.save(product);
     res.send({status:"success", message:"Product added"});
 })
@@ -22,12 +23,12 @@ router.get("/:id",async(req,res)=>{
     let result = await contenedor.getById(id)
     res.send(result)
 })
-router.put('/:id', async (request, response) => {/*De esta manera se actualiza{ "title": "(insertarTitulo)","(ej)": "15500","thumbnail": "(ej)"}*/
-    const id = request.params.id
-    const productBody = request.body
+router.put('/:id', async (req, res) => {/*De esta manera se actualiza{ "title": "(insertarTitulo)","(ej)": "15500","thumbnail": "(ej)"}*/
+    const id = req.params.id
+    const productBody = req.body
 
     let result = await contenedor.update(productBody, id)
-    response.send(result)
+    res.send(result)
 })
 router.delete("/:id",async(req,res)=>{
     let id = req.params.id;

@@ -1,22 +1,16 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<%-include('./partials/head') %>
 <body>
     <h1>Productos</h1>
     <form id="productForm">
-        <label>Titulo</label>
-        <input type="text" name="title">
-        <label>Precio</label>
-        <input type="number" name="price">
-        <label>Portada</label>
-        <input type="file" name="thumbnail">
-        <button type="submit">Enviar</button>
+        <label class="textForm">Titulo</label>
+        <input type="text" name="title" style="padding:3px">
+        <label class="textForm">Precio</label>
+        <input type="number" name="price" style="padding:3px">
+        <label class="textForm">Portada</label>
+        <input type="file" name="thumbnail" >
+        <button type="submit" class="enviar">Enviar</button>
     </form>
-    <a href="http://localhost:8080/productos"><button>Ver productos</button>
+    <a href="http://localhost:8080/productos"><button class="btnProducts">Ver productos</button>
     </a>
 </body>
 <script src="index.js"></script>

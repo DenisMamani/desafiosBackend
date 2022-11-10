@@ -1,33 +1,24 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!-- con esto incluye otro archivo ejs -->
+<%- include('./partials/head')  %> 
 <body >
-    
 <% if (productosArray.length === 0) { %>
 <h1>No hay productos</h1>
 <% }else{ %>
     <table class="listProducts">
         <tr>
-        <th class="titulo">Título</th>
-        <th>Precio</th>
-        <th>Imágen</th>
+        <th class="text">Título</th>
+        <th class="text ">Precio</th>
+        <th class="text ">Imágen</th>
         </tr>
     <% productosArray.forEach(producto => { %>
         <tr>
-            <td><%= producto.title %></td>
-            <td><%= producto.price %> </p></td>
-            <td><img class="img" src=<%= producto.thumbnail  %>  alt=""></td>
+            <td class="style borde"><%= producto.title %></td>
+            <td class="style borde"><%= producto.price %> </p></td>
+            <td class="borde"><img class="img" src=<%= producto.thumbnail  %>  alt=""></td>
             </tr>
     <% }) %>
 </table>
 <% } %> 
-<a href="http://localhost:8080"><button>Agregar productos</button>
+<a href="http://localhost:8080"><button class="btnProducts">Agregar productos</button>
 </a>
 </body>
-</html>

@@ -1,4 +1,4 @@
-<%-include('./partials/head') %>
+<%- include('../views/partials/head')  %> 
 <body>
     <h1>Productos</h1>
     <form id="productForm">
@@ -11,6 +11,8 @@
         <button type="submit" class="enviar">Enviar</button>
     </form>
     <a href="http://localhost:8080/productos"><button class="btnProducts">Ver productos</button>
+    </a>
+    <a href="http://localhost:8080/chat"><button class="btnProducts">Ir al chat</button>
     </a>
 </body>
 <script src="index.js"></script>

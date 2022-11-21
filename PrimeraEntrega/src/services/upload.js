@@ -1,0 +1,14 @@
+import multer from "multer";
+import __dirname from "../utils.js";
+
+const storage = multer.diskStorage({ 
+    destination: (req, file, cb) => { 
+        cb(null, __dirname + "/public/thumbnail")
+    },
+    filename: (req, file, cb) => { 
+        file.originalname = file.originalname.split(" ").join("")
+        cb(null, Date.now()+"-"+file.originalname)
+    }
+})
+const uploader = multer({ storage }); 
+export default uploader

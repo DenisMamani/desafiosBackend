@@ -3,6 +3,7 @@ import __dirname from "./utils.js";
 import productsRouter from "./routes/products.router.js"
 import Contenedor from "./Contenedor/contenedor.js";
 import { Server } from "socket.io";
+import cartRouter from "./routes/cart.router.js"
 const app = express();
 app.use(express.static(__dirname+"/public"));
 app.use(express.urlencoded({ extended:true }))
@@ -43,3 +44,4 @@ io.on("connection", async socket=>{
         socket.broadcast.emit("newUserConnected", data);
     })
 })
+app.use("/api/cart",cartRouter)

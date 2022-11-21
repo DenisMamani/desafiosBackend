@@ -1,45 +1,45 @@
 import fs from "fs";
 import path from "path";
 import __dirname from "../utils.js";
-const pathToFile = __dirname + "/products.json";
+const pathToFile = __dirname + "/files/products.json";
+const fechaHora = () => {
+    const fh = new Date();
+    const day = fh.getDate()
+    const month = fh.getMonth()
+    const year = fh.getFullYear()
+    return `${day}/${month}/${year}`
+}
 class Contenedor {
     save = async (product) => {
-        if (!product.title || !product.price || !product.thumbnail) {
-            return {
-                status: "error",
-                message: "Missing requires fields",
-            }
-        }
         try {
             if (fs.existsSync(pathToFile)) {
                 let data = await fs.promises.readFile(pathToFile, "utf-8");
-                let products = JSON.parse(data);
-                let id = products.length + 1;
+                let productos = JSON.parse(data);
+                let id = productos.length + 1;
                 product.id = id;
-                products.push(product);
-                await fs.promises.writeFile(pathToFile, JSON.stringify(products, null, 2))
+                product.timestamp = fechaHora()
+                productos.push(product)
+                await fs.promises.writeFile(pathToFile, JSON.stringify(productos, null, 2))
                 return {
                     status: "success",
-                    message: "Product created successfully"
+                    message: "Product created",
                 }
-            } else {
+            } 
                 product.id = 1;
-                await fs.promises.writeFile(
-                    pathToFile,
-                    JSON.stringify([product], null, 2)
-                );
+                product.timestamp = fechaHora()
+                await fs.promises.writeFile(pathToFile, JSON.stringify([product], null, 2));
                 return {
                     status: "success",
-                    message: "Product created successfully"
+                    message: "Product created",
                 }
-            }
+            
         } catch (error) {
             return {
-                status: "error",
-                message: error.message,
-            };
+                status: "Error",
+                message: error.message
+            }
         }
-    };
+    }
     readFile = async() =>{
         const data = await fs.promises.readFile(pathToFile, "utf-8");
         return JSON.parse(data);
@@ -116,7 +116,7 @@ class Contenedor {
             );
             return {
                 status: "success",
-                message: "Product deleted successfully",
+                message: "Product deleted",
             }
         } else {
             return {
@@ -133,7 +133,7 @@ class Contenedor {
             if (element.id == id) {
                 return {
                     ...product,
-                    id: id
+                    id: id,
                 }
             } else {
                 return element

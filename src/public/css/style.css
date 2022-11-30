@@ -21,9 +21,9 @@
 .style{
     border-right: 1px black solid;
     padding: 4px 15px;
-    color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 18px;
+    color: aliceblue;
 }
 .borde{
     border-top: 1px solid black;

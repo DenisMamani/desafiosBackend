@@ -3,10 +3,11 @@ import __dirname from "./utils.js";
 import productsRouter from "./routes/products.router.js"
 import Contenedor from "./Contenedor/contenedor.js";
 import { Server } from "socket.io";
-import cartRouter from "./routes/cart.router.js"
+import containerSQL from "./Contenedor/containerSQL.js";
+import sqliteOptions from "./dbs/knex.js";
+import ChatContainer from "./Contenedor/chatContainer.js";
 const app = express();
 app.use(express.static(__dirname+"/public"));
-app.use(express.urlencoded({ extended:true }))
 app.set("views",__dirname+"/public");
 app.set("view engine","ejs");
 app.get("/",async(req,res)=>{
@@ -15,15 +16,17 @@ app.get("/",async(req,res)=>{
 const productsService = new Contenedor();
 app.use(express.json());
 app.use("/api/productos",productsRouter);
-const server = app.listen(8080, ()=>console.log("Escuchando"))
+const server = app.listen(8080, ()=>console.log("Listening"))
 const io = new Server(server);
+
+const productSQL = new containerSQL(sqliteOptions, "products")
+const messagesSQL = new containerSQL(sqliteOptions, "messages")
 const messages = []
 app.get("/productos",async(req,res)=>{
-    let productos = await productsService.getAll()
-    let productosArray = productos.products
+    let productos = await productSQL.getAll();
 res.render("productos",
 {
-    productosArray
+    productos
 }
 )
 });
@@ -31,17 +34,18 @@ res.render("productos",
 app.get("/chat",(req,res)=>{
     res.render("chat");
 })
+const chatService = new ChatContainer();
 io.on("connection", async socket=>{
-    let productos = await productsService.getAll()
-    let productosArray = productos.products
-    socket.emit("productos", productosArray)
-    socket.emit("logs",messages);
+    let productos = await productSQL.getAll()
+    socket.emit("productos", await productSQL.getAll())
+
     socket.on("message", async data=>{
-        messages.push(data);
-        io.emit("logs",messages);
+        await messagesSQL.addProduct(data);
+        const messagesC = await messagesSQL.getAll();
+        io.emit("logs",messagesC);
     })
+    socket.emit("logs", await messagesSQL.getAll());
     socket.on("authenticated",data=>{
         socket.broadcast.emit("newUserConnected", data);
     })
 })
-app.use("/api/cart",cartRouter)

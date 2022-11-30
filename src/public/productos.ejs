@@ -1,15 +1,10 @@
 <!-- con esto incluye otro archivo ejs -->
 <%- include('../views/partials/head')  %> 
 <body >
-<% if (productosArray.length === 0) { %>
+<% if (productos.length === 0) { %>
 <h1>No hay productos</h1>
 <% }else{ %>
     <table id="productTable">
-        <tr>
-            <th class="text">Título</th>
-            <th class="text ">Precio</th>
-            <th class="text ">Imágen</th>
-        </tr>
 </table>
 <% } %> 
 <a href="http://localhost:8080"><button class="btnProducts">Agregar productos</button>
